@@ -9,6 +9,6 @@ config LL_IRQFWD_UART2
 
 config LL_IRQFWD_USB
 	bool "Enable IRQ forwarding for USB"
-	default n
+	default y
 
 
