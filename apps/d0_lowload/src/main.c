@@ -191,6 +191,10 @@ void linux_load()
 
 extern void bflb_uart_set_console(struct bflb_device_s *dev);
 
+__WEAK void usb_hc_low_level_init(void)
+{
+}
+
 int main(void)
 {
     board_init();
@@ -227,6 +231,9 @@ int main(void)
                    :
                    : "r"(0x30013));
 
+    LOG_I("Starting low level USB\r\n");
+    usb_hc_low_level_init();
+    
     LOG_I("Setting PMP\r\n");
     pmp_status_type_e ret = rvpmp_init(pmp_entry_tab, sizeof(pmp_entry_tab) / sizeof(pmp_config_entry_t));
     if (ret != PMP_STATUS_OK) {

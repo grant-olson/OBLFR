@@ -121,6 +121,21 @@ int setup_sdh_peripheral() {
 }
 #endif
 
+#ifdef CONFIG_LL_IRQFWD_USB
+__WEAK void usb_hc_low_level_init(void)
+{
+}
+
+__WEAK void usb_hc_low_level2_init(void)
+{
+}
+
+int setup_usb_peripheral() {
+  //  usb_hc_low_level_init();
+  //  usb_hc_low_level2_init();
+}
+#endif
+
 int main(void)
 {
     board_init();
@@ -155,6 +170,8 @@ int main(void)
 
     bflb_irq_attach(USB_IRQn, UART2_IRQHandler, NULL);
     bflb_irq_enable(USB_IRQn);
+
+    setup_usb_peripheral();
 #endif
 
     while (1)
