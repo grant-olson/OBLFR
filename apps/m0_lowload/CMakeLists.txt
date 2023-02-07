@@ -16,6 +16,6 @@ endif()
 include(${SDK_PATH}/cmake/bflbsdk.cmake)
 
 target_compile_options(app PRIVATE -ggdb -Os)
-target_sources(app PRIVATE src/usb_dc_init.c)
+target_sources(app PRIVATE src/usb_dc_init.c src/usb_hc_init.c)
 sdk_set_main_file(src/main.c)
 project(m0_lowload)

@@ -30,12 +30,17 @@
 #define DBG_TAG "MAIN"
 #include <log.h>
 
+extern void usb_hc_low_level_init(void);
 extern int usb_dc_init(void);
 
 int main(void)
 {
     board_init();
+#if 1
+    usb_hc_low_level_init();
+#else
     usb_dc_init();
+#endif
     
     LOG_I("Starting Mailbox Handlers\r\n");
 
