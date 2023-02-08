@@ -131,28 +131,29 @@ void usb_hc_low_level_init(void)
     //bflb_irq_enable(37);
 
     /* enable device-A for host */
-    regval = getreg32(BFLB_PDS_BASE + PDS_USB_CTL_OFFSET);
     regval &= ~PDS_REG_USB_IDDIG;
     putreg32(regval, BFLB_PDS_BASE + PDS_USB_CTL_OFFSET);
 
     
+    /*    regval = getreg32(BFLB_PDS_BASE + PDS_USB_CTL_OFFSET);
     regval = getreg32(BLFB_USB_BASE + USB_OTG_CSR_OFFSET);
     regval |= USB_A_BUS_DROP_HOV;
     regval &= ~USB_A_BUS_REQ_HOV;
     putreg32(regval, BLFB_USB_BASE + USB_OTG_CSR_OFFSET);
+    */
 
     bflb_mtimer_delay_ms(10);
-
     /* enable vbus and bus control */
-    regval = getreg32(BLFB_USB_BASE + USB_OTG_CSR_OFFSET);
+    /*    regval = getreg32(BLFB_USB_BASE + USB_OTG_CSR_OFFSET);
     regval &= ~USB_A_BUS_DROP_HOV;
     regval |= USB_A_BUS_REQ_HOV;
     putreg32(regval, BLFB_USB_BASE + USB_OTG_CSR_OFFSET);
-
+    */
+    
     regval = getreg32(BLFB_USB_BASE + USB_GLB_INT_OFFSET);
-    regval &= ~USB_MDEV_INT;
-    regval |= USB_MOTG_INT;
-    regval |= USB_MHC_INT;
+    regval |= USB_MDEV_INT;
+    regval &= ~USB_MOTG_INT;
+    regval &= ~USB_MHC_INT;
     putreg32(regval, BLFB_USB_BASE + USB_GLB_INT_OFFSET);
 }
 
